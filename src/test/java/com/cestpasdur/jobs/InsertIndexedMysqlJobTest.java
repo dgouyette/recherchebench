@@ -1,6 +1,7 @@
 package com.cestpasdur.jobs;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:insertMysqlIndex-test.xml"})
+@Ignore
 public class InsertIndexedMysqlJobTest {
 
 

@@ -6,6 +6,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.node.Node;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:insertElasticsearch-test.xml"})
+@Ignore
 public class InsertElasticSearchTest {
 
 

@@ -44,7 +44,6 @@ public class PersonnePhysiqueElasticIndexer implements ItemWriter<PersonnePhysiq
         if (bulkResponse.hasFailures()) {
             throw new RuntimeException("Des exceptions ont eu lieu : " + bulkResponse.buildFailureMessage());
         }
-        System.out.println(nbWrite);
 
 
     }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.cestpasdur"/>
+
+
+    <bean id="jobOperator"
+          class="org.springframework.batch.core.launch.support.SimpleJobOperator"
+          p:jobLauncher-ref="jobLauncher" p:jobExplorer-ref="jobExplorer"
+          p:jobRepository-ref="jobRepository" p:jobRegistry-ref="jobRegistry"/>
+
+    <bean id="jobExplorer"
+          class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean"
+          p:dataSource-ref="dataSourceJobRepository"/>
+
+    <bean id="jobRegistry"
+          class="org.springframework.batch.core.configuration.support.MapJobRegistry"/>
+
+    <bean
+            class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+        <property name="jobRegistry" ref="jobRegistry"/>
+    </bean>
+
+    <bean id="jobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository"/>
+    </bean>
+
+    <bean id="jobRepository"
+          class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"
+          p:dataSource-ref="dataSourceJobRepository" p:transactionManager-ref="transactionManager"/>
+
+    <bean id="dataSourceJobRepository" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${batch.jobRepository.jdbc.driver}"/>
+        <property name="url" value="${batch.jobRepository.jdbc.url}"/>
+        <property name="username" value="${batch.jobRepository.jdbc.user}"/>
+        <property name="password" value="${batch.jobRepository.jdbc.password}"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${batch.jdbc.driver}"/>
+        <property name="url" value="${batch.jdbc.url}"/>
+        <property name="username" value="${batch.jdbc.user}"/>
+        <property name="password" value="${batch.jdbc.password}"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          lazy-init="true">
+        <property name="dataSource" ref="dataSourceJobRepository"/>
+    </bean>
+
+    <bean id="placeholderProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:batch.properties"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="order" value="1"/>
+    </bean>
+
+
+
+
+
+
+
+
+</beans>

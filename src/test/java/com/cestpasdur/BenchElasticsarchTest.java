@@ -19,7 +19,6 @@ import java.util.List;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
-@Ignore
 public class BenchElasticsarchTest {
 
 
@@ -32,7 +31,7 @@ public class BenchElasticsarchTest {
 
     private Client client;
 
-    private static final int nbRepetitions = 10;
+    private static final int nbRepetitions = 100;
 
     private static final boolean EXPLAIN_ENABLED = false;
 
