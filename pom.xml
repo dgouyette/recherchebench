@@ -56,8 +56,8 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.jdbc</artifactId>
-            <version>3.1.1.RELEASE</version>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.framework.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.aopalliance</groupId>
@@ -149,11 +149,6 @@
             <artifactId>spring-beans</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.framework.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -190,4 +185,13 @@
 
 
     </dependencies>
+    
+    <repositories>
+        <repository>
+            <!-- For Elastic Search -->
+            <id>Sonatype</id>
+            <name>Sonatype</name>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 </project>
